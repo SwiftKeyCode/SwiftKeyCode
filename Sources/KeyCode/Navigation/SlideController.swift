@@ -17,6 +17,7 @@ public struct SlideController: View {
 			[]: .default,
 			[.option]: .easeInOut(duration: 1),
 			[.command]: .easeInOut(duration: 3),
+			[.shift]: .instant
 		 ]
 	) {
 		self.animations = animations
