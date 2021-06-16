@@ -7,27 +7,27 @@
 
 import Foundation
 
-struct Sequencer<State> {
+public struct Sequencer<State> {
 	private var array: [State]
 	private var pushed: [State] = []
 	
-	init(initialState: State) {
+	public init(initialState: State) {
 		array = [initialState]
 	}
 	
-	var asArray: [State] { array }
+	public var asArray: [State] { array }
 
-	mutating func set(_ state: State) {
+	public mutating func set(_ state: State) {
 		array.append(state)
 	}
 	
-	mutating func next(_ fun: (inout State) -> Void) {
+	public mutating func next(_ fun: (inout State) -> Void) {
 		var x = array.last!
 		fun(&x)
 		array.append(x)
 	}
 	
-	mutating func temporary(_ fun: (inout Sequencer) -> Void) {
+	public mutating func temporary(_ fun: (inout Sequencer) -> Void) {
 		pushed.append(array.last!)
 		
 		fun(&self)
@@ -35,7 +35,7 @@ struct Sequencer<State> {
 		set(pushed.removeLast())
 	}
 	
-	subscript<T>(_ key: WritableKeyPath<State, T>) -> T {
+	public subscript<T>(_ key: WritableKeyPath<State, T>) -> T {
 		get { array.last![keyPath: key] }
 		set { next { $0[keyPath: key] = newValue } }
 	}

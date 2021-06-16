@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-extension View {
+public extension View {
 	func blinking(opacity: (Double, Double) = (0.2, 1)) -> some View {
 		let change = opacity.1 - opacity.0
 		return boomerangAnimation {
@@ -24,15 +24,15 @@ extension View {
 	}
 }
 
-struct BoomerangView<V: View, M: View>: View {
-	var content: V
-	var modifier: (V, Double) -> M
+public struct BoomerangView<V: View, M: View>: View {
+	public var content: V
+	public var modifier: (V, Double) -> M
 
-	var animation: Animation = Animation.linear(duration: 0.6)
+	public var animation: Animation = Animation.linear(duration: 0.6)
 
-	@State var value: Double = 0
+	@State public var value: Double = 0
 	
-	init(
+	public init(
 		content: V,
 		modifier: @escaping (V, Double) -> M,
 		animation: Animation = Animation.linear(duration: 0.6)
@@ -43,7 +43,7 @@ struct BoomerangView<V: View, M: View>: View {
 		self._value = .init(initialValue: 0.0)
 	}
 	
-	var body: some View {
+	public var body: some View {
 		modifier(content, value)
 			.onAppear {
 				withAnimation(animation.repeatForever()) {
