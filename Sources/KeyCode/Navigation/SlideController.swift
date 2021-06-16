@@ -10,7 +10,7 @@ import SwiftUI
 public struct SlideController: View {
 	@Environment(\.slideContext) var context
 	
-	public var animations: [EventModifiers: Animation]
+	public var animations: [(EventModifiers, Animation)]
 	
 	public init(
 		animations: [EventModifiers: Animation] = [
@@ -20,20 +20,20 @@ public struct SlideController: View {
 			[.shift]: .instant
 		 ]
 	) {
-		self.animations = animations
+		self.animations = Array(animations).sorted { $0.key.rawValue < $1.key.rawValue }
 	}
 	
 	public var body: some View {
 		ZStack {
-			ForEach(Array(animations.keys), id: \.rawValue) { modifiers in
+			ForEach(Array(animations), id: \.0) { (modifiers, animation) in
 				Button.invisible {
-					_ = withAnimation(animations[modifiers]) {
+					_ = withAnimation(animation) {
 						context?.previous()
 					}
 				}.keyboardShortcut(.leftArrow, modifiers: modifiers)
 
 				Button.invisible {
-					_ = withAnimation(animations[modifiers]) {
+					_ = withAnimation(animation) {
 						context?.next()
 					}
 				}.keyboardShortcut(.rightArrow, modifiers: modifiers)
