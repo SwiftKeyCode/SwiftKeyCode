@@ -1,6 +1,6 @@
 # KeyCode
 
-A Framework for ease of use in creating presentations using SwiftUI.
+A Framework for creating presentations using SwiftUI.
 
 ## Setup
 
