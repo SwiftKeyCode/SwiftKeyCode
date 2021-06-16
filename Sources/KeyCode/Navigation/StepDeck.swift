@@ -26,7 +26,7 @@ public struct StepDeck<Content: View>: View {
 	public var steps: Int
 	@ViewBuilder public var content: (Int) -> Content
 
-	public init(steps: Int, content: @escaping (Int) -> Content) {
+	public init(steps: Int, @ViewBuilder content: @escaping (Int) -> Content) {
 		self.steps = steps
 		self.content = content
 	}
