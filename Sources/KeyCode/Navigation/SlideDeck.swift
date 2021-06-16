@@ -23,8 +23,13 @@ public struct SlideDeck: View {
 	}
 }
 
-//struct SlideDeck_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SlideDeck()
-//    }
-//}
+struct SlideDeck_Previews: PreviewProvider {
+    static var previews: some View {
+		SlideDeck {
+			Text("A")
+			
+			Image(systemName: "arrow.right")
+		}.frame(minWidth: 800, minHeight: 600)
+			.withSlideController()
+    }
+}
