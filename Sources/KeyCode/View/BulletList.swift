@@ -8,8 +8,15 @@
 import SwiftUI
 
 public struct BulletList<Bullet: View, Content: View>: View {
-	public var bullet: BulletBuilder<Bullet>.Builder
-	@ViewBuilder public var content: (BulletBuilder<Bullet>) -> Content
+	public typealias Builder = BulletBuilder<Bullet>
+	
+	public var bullet: Builder.Function
+	@ViewBuilder public var content: (Builder) -> Content
+	
+	public init(_ bullet: @escaping Builder.Function, content: @escaping (Builder) -> Content) {
+		self.bullet = bullet
+		self.content = content
+	}
 	
 	public var body: some View {
 		VStack(alignment: .leading) {
@@ -19,9 +26,9 @@ public struct BulletList<Bullet: View, Content: View>: View {
 }
 
 public struct BulletBuilder<Bullet: View> {
-	public typealias Builder = (Int) -> Bullet
+	public typealias Function = (Int) -> Bullet
 	
-	public var bullet: Builder
+	public var bullet: Function
 	
 	public func callAsFunction<Content: View>(_ n: Int, @ViewBuilder content: () -> Content) -> some View {
 		HStack(alignment: .top, spacing: nil) {
