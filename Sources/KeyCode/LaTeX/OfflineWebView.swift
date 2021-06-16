@@ -15,6 +15,10 @@ public class UninteractableWebView: WKWebView {
 public struct OfflineWebView: View, NSViewRepresentable {
 	public var html: String
 		
+	public init(html: String) {
+		self.html = html
+	}
+	
 	public func makeNSView(context: NSViewRepresentableContext<OfflineWebView>) -> WKWebView {
 		let configuration = WKWebViewConfiguration()
 

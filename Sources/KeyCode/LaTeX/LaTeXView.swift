@@ -9,9 +9,15 @@ import SwiftUI
 
 public struct LaTeXView: View {
 	public var text: String
-	public var color: Color = .primary
-	public var fontSize = "40px"
+	public var color: Color
+	public var fontSize: String
 
+	public init(text: String, color: Color = .primary, fontSize: String = "40px") {
+		self.text = text
+		self.color = color
+		self.fontSize = fontSize
+	}
+	
 	public var body: some View {
 		let rgba = color.rgba
 

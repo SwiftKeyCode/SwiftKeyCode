@@ -26,6 +26,11 @@ public struct StepDeck<Content: View>: View {
 	public var steps: Int
 	@ViewBuilder public var content: (Int) -> Content
 
+	public init(steps: Int, content: @escaping (Int) -> Content) {
+		self.steps = steps
+		self.content = content
+	}
+	
 	public var body: some View {
 		ContentView(content: content)
 			.environment(\.slideContext, parentContext?.makeChild(max: steps))

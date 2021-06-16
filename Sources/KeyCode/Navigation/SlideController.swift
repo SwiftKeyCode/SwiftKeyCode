@@ -10,11 +10,17 @@ import SwiftUI
 public struct SlideController: View {
 	@Environment(\.slideContext) var context
 	
-	public var animations: [EventModifiers: Animation] = [
-		[]: .default,
-		[.option]: .easeInOut(duration: 1),
-		[.command]: .easeInOut(duration: 3)
-	]
+	public var animations: [EventModifiers: Animation]
+	
+	public init(
+		animations: [EventModifiers: Animation] = [
+			[]: .default,
+			[.option]: .easeInOut(duration: 1),
+			[.command]: .easeInOut(duration: 3),
+		 ]
+	) {
+		self.animations = animations
+	}
 	
 	public var body: some View {
 		ZStack {
