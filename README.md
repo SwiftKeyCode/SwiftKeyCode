@@ -2,6 +2,10 @@
 
 A Framework for ease of use in creating presentations using SwiftUI.
 
+## Setup
+
+When using LatTeX views from this package, make sure the "outgoing connections" capability is enabled. While there are no outgoing connections, this capability is required to launch WKWebView even with local strings.
+
 ## How To Use
 
 First, include this package. Best, you start with a theme (ToDo).
