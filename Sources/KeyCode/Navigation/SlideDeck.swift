@@ -10,7 +10,7 @@ import SwiftUI
 public struct SlideDeck: View {
 	@AnyViewBuilder public var views: () -> [AnyView]
 	
-	public init(views: @escaping () -> [AnyView]) {
+	public init(@AnyViewBuilder views: @escaping () -> [AnyView]) {
 		self.views = views
 	}
 	
