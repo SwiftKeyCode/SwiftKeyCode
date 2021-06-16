@@ -45,7 +45,7 @@ public struct SlideController: View {
 extension EventModifiers: Hashable {}
 
 public extension View {
-	func withSlideController() -> some View {
-		background(SlideController()).environment(\.slideContext, SlideContext(max: 0))
+	func withSlideController(_ controller: SlideController = SlideController()) -> some View {
+		background(controller).environment(\.slideContext, SlideContext(max: 0))
 	}
 }
