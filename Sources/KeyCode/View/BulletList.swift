@@ -13,7 +13,7 @@ public struct BulletList<Bullet: View, Content: View>: View {
 	public var bullet: Builder.Function
 	@ViewBuilder public var content: (Builder) -> Content
 	
-	public init(_ bullet: @escaping Builder.Function, content: @escaping (Builder) -> Content) {
+	public init(_ bullet: @escaping Builder.Function, @ViewBuilder content: @escaping (Builder) -> Content) {
 		self.bullet = bullet
 		self.content = content
 	}
