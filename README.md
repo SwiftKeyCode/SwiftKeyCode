@@ -18,8 +18,7 @@ When your project is set up, you can navigate the presentation as such:
 Hold one of the following modifiers for animation modification:
 
 * **⌥ option** | animate slowly
-* **⌘ command** | animate even more slowly
-* **⇧ shift** | no animation
+* **⌘ command** | do not animate
 
 Note that as opposed to normal presentation programs, you can easily skip through your presentation holding left or right. SwiftUI is pretty good at state interpolation.
 

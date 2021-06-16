@@ -16,8 +16,7 @@ public struct SlideController: View {
 		animations: [EventModifiers: Animation] = [
 			[]: .default,
 			[.option]: .easeInOut(duration: 1),
-			[.command]: .easeInOut(duration: 3),
-			[.shift]: .instant
+			[.command]: .instant
 		 ]
 	) {
 		self.animations = Array(animations).sorted { $0.key.rawValue < $1.key.rawValue }
