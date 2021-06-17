@@ -70,6 +70,7 @@ public class SlideContext: ObservableObject {
 	public func makeChild(max: Int) -> SlideContext {
 		let child = SlideContext(max: max, current: isMovingBackwards ? max - 1 : 0)
 		self.child = child
+		child.isMovingBackwards = isMovingBackwards
 		return child
 	}
 }
