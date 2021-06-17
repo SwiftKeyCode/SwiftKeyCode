@@ -34,7 +34,9 @@ public struct BulletBuilder<Bullet: View> {
 		HStack(alignment: .top, spacing: nil) {
 			bullet(n)
 			
-			content()
+			VStack(alignment: .leading) {
+				content()
+			}
 		}
 	}
 }
