@@ -10,7 +10,7 @@ import SwiftUI
 public struct StepDeck: AnyDeck {
 	public var states: [AnyDeck]
 	
-	public init(_ range: Range<Int>, fun: (Int) -> AnyDeck) {
+	public init(_ range: Range<Int>, @DeckBuilder<AnyView> fun: (Int) -> AnyDeck) {
 		states = range.map(fun)
 	}
 	
