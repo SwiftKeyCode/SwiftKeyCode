@@ -8,13 +8,13 @@
 import SwiftUI
 
 public struct Deck<V: View>: AnyDeck {
-	public var contents: [AnyView]
+	public var contents: [V]
 	
-	public init(@DeckBuilder<AnyView> _ contents: () -> [AnyView]) {
+	public init(@DeckBuilder<AnyView> _ contents: () -> [V]) {
 		self.contents = contents()
 	}
 	
 	public var steps: [AnyView] {
-		return contents
+		return contents.map { AnyView($0) }
 	}
 }
