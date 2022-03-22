@@ -13,9 +13,9 @@ public struct DeckStepperView: View {
 	public let deck: [AnyView]
 	public var animations: [(EventModifiers, Animation)]
 	
-	@State var step: Int = 0
+	@State public var step: Int = 0
 
-	init(
+	public init(
 		animations: [EventModifiers: Animation] = [
 			[]: .default,
 		   [.option]: .easeInOut(duration: 1),
@@ -48,11 +48,11 @@ public struct DeckStepperView: View {
 		}
 	}
 	
-	func previous() {
+	public func previous() {
 		step = min(step + 1, deck.count)
 	}
 	
-	func next() {
+	public func next() {
 		step = max(step - 1, 0)
 	}
 }
