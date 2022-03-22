@@ -10,7 +10,7 @@ import SwiftUI
 public struct StepSlide<V: View>: AnyDeck {
 	public var slides: [V]
 	
-	public init(_ range: Range<Int>, fun: (Int) -> V) {
+	public init(_ range: Range<Int>, @ViewBuilder fun: (Int) -> V) {
 		slides = range.map(fun)
 	}
 	

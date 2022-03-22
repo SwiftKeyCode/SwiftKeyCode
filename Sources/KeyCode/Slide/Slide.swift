@@ -10,10 +10,14 @@ import SwiftUI
 public struct Slide<V: View>: AnyDeck {
 	public var contents: V
 	
+	public init(@ViewBuilder _ contents: () -> V) {
+		self.contents = contents()
+	}
+
 	public init(_ contents: V) {
 		self.contents = contents
 	}
-	
+
 	public var steps: [AnyView] {
 		return [AnyView(contents)]
 	}
