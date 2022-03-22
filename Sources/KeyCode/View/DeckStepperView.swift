@@ -49,7 +49,7 @@ public struct DeckStepperView: View {
 	}
 	
 	public func previous() {
-		step = min(step + 1, deck.count)
+		step = min(step + 1, deck.count - 1)
 	}
 	
 	public func next() {
