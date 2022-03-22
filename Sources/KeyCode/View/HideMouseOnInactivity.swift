@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+
+#if !os(iOS)
 import Cocoa
 
 public struct HideMouseOnInactivity: NSViewRepresentable {
@@ -56,3 +58,5 @@ struct HideMouseOnInactivity_Previews: PreviewProvider {
         HideMouseOnInactivity(seconds: 1)
     }
 }
+
+#endif
