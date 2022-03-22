@@ -10,7 +10,7 @@ import SwiftUI
 @resultBuilder
 public struct DeckBuilder<T> {
 	public static func buildBlock() -> [AnyView] {
-		EmptyDeck().steps
+		[]
 	}
 }
 
