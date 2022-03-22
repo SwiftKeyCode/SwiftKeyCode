@@ -30,7 +30,9 @@ public struct DeckStepperView: View {
 	
 	public var body: some View {
 		ZStack {
-			deck[step]
+			VStack {
+				deck[step]
+			}
 
 			ForEach(Array(animations), id: \.0) { (modifiers, animation) in
 				Button.invisible {
