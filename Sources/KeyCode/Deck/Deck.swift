@@ -14,6 +14,10 @@ public struct Deck<V: View>: AnyDeck {
 		self.contents = contents()
 	}
 	
+	public init(_ contents: [V]) {
+		self.contents = contents
+	}
+
 	public var steps: [AnyView] {
 		return contents.map { AnyView($0) }
 	}
