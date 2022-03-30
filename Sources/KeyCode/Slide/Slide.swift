@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct Slide<V: View>: AnyDeck {
+public struct Slide<V: View>: Deck {
 	public var contents: V
 	
 	public init(@ViewBuilder _ contents: () -> V) {

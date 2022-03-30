@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct StepDeck<V: View>: AnyDeck {
+public struct StepDeck<V: View>: Deck {
 	public var states: [V]
 	
 	public init(_ range: Range<Int>, @DeckBuilder<AnyView> fun: (Int) -> [V]) {
