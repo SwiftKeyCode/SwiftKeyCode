@@ -9,11 +9,11 @@ import SwiftUI
 
 @resultBuilder
 public struct DeckBuilder {
-	static func buildBlock() -> EmptyDeck {
+	public static func buildBlock() -> EmptyDeck {
 		.init()
 	}
 
-	static func buildBlock<Content: Deck>(_ c0: Content) -> Content {
+	public static func buildBlock<Content: Deck>(_ c0: Content) -> Content {
 		c0
 	}
 	
@@ -22,7 +22,7 @@ public struct DeckBuilder {
 	}
 }
 	
-extension DeckBuilder {
+public extension DeckBuilder {
 	static func buildBlock<C0: Deck, C1: Deck>(_ c0: C0, _ c1: C1) -> TupleDeck2<C0, C1> {
 		.init(contents: (c0, c1))
 	}
