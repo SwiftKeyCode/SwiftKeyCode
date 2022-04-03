@@ -15,15 +15,16 @@ public struct DeckStepperView<Content: View>: View {
 	
 	@State public var step: Int = 0
 
-	public init(
+	public init<DeckContent: Deck>(
 		animations: [EventModifiers: Animation] = [
 			[]: .default,
 		   [.option]: .easeInOut(duration: 1),
 		   [.command]: .instant
 		],
-		@DeckBuilder deck: () -> [Content])
+		@DeckBuilder deck: () -> DeckContent
+	) where DeckContent.Content == Content
 	{
-		self.deck = deck()
+		self.deck = deck().steps
 		
 		self.animations = Array(animations).sorted { $0.key.rawValue < $1.key.rawValue }
 	}
