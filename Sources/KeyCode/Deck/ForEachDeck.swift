@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct ForEachDeck<Data: RandomAccessCollection, Content: View>: Deck {
+public struct ForEachDeck<Data: RandomAccessCollection, Content: Deck>: Deck {
 	public var data: Data
 	public var fun: (Data.Element) -> Content
 	
@@ -16,7 +16,7 @@ public struct ForEachDeck<Data: RandomAccessCollection, Content: View>: Deck {
 		self.fun = fun
 	}
 	
-	public var steps: [Content] {
-		return data.map { fun($0) }
+	public var steps: [Content.Content] {
+		return data.flatMap { fun($0).steps }
 	}
 }
