@@ -7,14 +7,16 @@
 
 import SwiftUI
 
-public struct StepDeck<V: View>: Deck {
-	public var states: [V]
+public struct ForEachDeck<Data: RandomAccessCollection, Content: View>: Deck {
+	public var data: Data
+	public var fun: (Data.Element) -> [Content]
 	
-	public init(_ range: Range<Int>, @DeckBuilder<AnyView> fun: (Int) -> [V]) {
-		states = range.flatMap(fun)
+	public init(_ data: Data, @DeckBuilder<AnyView> fun: @escaping (Data.Element) -> [Content]) {
+		self.data = data
+		self.fun = fun
 	}
 	
 	public var steps: [AnyView] {
-		return states.map { AnyView($0) }
+		return data.flatMap { fun($0).map { AnyView($0) } }
 	}
 }
