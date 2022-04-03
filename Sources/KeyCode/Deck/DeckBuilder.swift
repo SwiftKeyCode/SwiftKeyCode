@@ -9,12 +9,12 @@ import SwiftUI
 
 @resultBuilder
 public struct DeckBuilder {
-	static func buildBlock() -> [EmptyView] {
-		[]
+	static func buildBlock() -> EmptyDeck {
+		.init()
 	}
 
-	static func buildBlock<Content: View>(_ c0: Content) -> [Content] {
-		[c0]
+	static func buildBlock<Content: View>(_ c0: Content) -> Slide<Content> {
+		.init(c0)
 	}
 	
 	static func buildBlock<C0: Deck, C1: Deck>(_ c0: C0, _ c1: C1) -> TupleDeck2<C0, C1> {

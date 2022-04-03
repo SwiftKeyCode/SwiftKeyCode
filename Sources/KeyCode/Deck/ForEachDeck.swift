@@ -9,14 +9,14 @@ import SwiftUI
 
 public struct ForEachDeck<Data: RandomAccessCollection, Content: View>: Deck {
 	public var data: Data
-	public var fun: (Data.Element) -> [Content]
+	public var fun: (Data.Element) -> Content
 	
-	public init(_ data: Data, @DeckBuilder fun: @escaping (Data.Element) -> [Content]) {
+	public init(_ data: Data, @DeckBuilder fun: @escaping (Data.Element) -> Content) {
 		self.data = data
 		self.fun = fun
 	}
 	
 	public var steps: [Content] {
-		return data.flatMap { fun($0) }
+		return data.map { fun($0) }
 	}
 }
