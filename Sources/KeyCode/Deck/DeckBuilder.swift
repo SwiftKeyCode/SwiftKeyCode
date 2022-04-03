@@ -8,50 +8,44 @@
 import SwiftUI
 
 @resultBuilder
-public struct DeckBuilder<T> {
-	public static func buildBlock() -> [AnyView] {
+public struct DeckBuilder {
+	static func buildBlock() -> [EmptyView] {
 		[]
 	}
-}
 
-public extension DeckBuilder {
-	static func buildBlock(_ c0: Deck) -> [AnyView] {
-		[c0].flatMap { $0.steps }
+	static func buildBlock<Content: View>(_ c0: Content) -> [Content] {
+		[c0]
+	}
+	
+	static func buildBlock<C0: Deck, C1: Deck>(_ c0: C0, _ c1: C1) -> TupleDeck2<C0, C1> {
+		.init(contents: (c0, c1))
 	}
 
-	static func buildBlock(_ c0: Deck, _ c1: Deck) -> [AnyView] {
-		[c0, c1].flatMap { $0.steps }
+	static func buildBlock<C0: Deck, C1: Deck, C2: Deck>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleDeck3<C0, C1, C2> {
+		.init(contents: (c0, c1, c2))
 	}
 
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck) -> [AnyView]{
-		[c0, c1, c2].flatMap { $0.steps }
+	static func buildBlock<C0: Deck, C1: Deck, C2: Deck, C3: Deck>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleDeck4<C0, C1, C2, C3> {
+		.init(contents: (c0, c1, c2, c3))
 	}
 
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck, _ c3: Deck) -> [AnyView] {
-		[c0, c1, c2, c3].flatMap { $0.steps }
+	static func buildBlock<C0: Deck, C1: Deck, C2: Deck, C3: Deck, C4: Deck>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleDeck5<C0, C1, C2, C3, C4> {
+		.init(contents: (c0, c1, c2, c3, c4))
 	}
 
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck, _ c3: Deck, _ c4: Deck) -> [AnyView] {
-		[c0, c1, c2, c3, c4].flatMap { $0.steps }
+	static func buildBlock<C0: Deck, C1: Deck, C2: Deck, C3: Deck, C4: Deck, C5: Deck>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleDeck6<C0, C1, C2, C3, C4, C5> {
+		.init(contents: (c0, c1, c2, c3, c4, c5))
 	}
 
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck, _ c3: Deck, _ c4: Deck, _ c5: Deck) -> [AnyView] {
-		[c0, c1, c2, c3, c4, c5].flatMap { $0.steps }
+	static func buildBlock<C0: Deck, C1: Deck, C2: Deck, C3: Deck, C4: Deck, C5: Deck, C6: Deck>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleDeck7<C0, C1, C2, C3, C4, C5, C6> {
+		.init(contents: (c0, c1, c2, c3, c4, c5, c6))
 	}
 
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck, _ c3: Deck, _ c4: Deck, _ c5: Deck, _ c6: Deck) -> [AnyView] {
-		[c0, c1, c2, c3, c4, c5, c6].flatMap { $0.steps }
+	static func buildBlock<C0: Deck, C1: Deck, C2: Deck, C3: Deck, C4: Deck, C5: Deck, C6: Deck, C7: Deck>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleDeck8<C0, C1, C2, C3, C4, C5, C6, C7> {
+		.init(contents: (c0, c1, c2, c3, c4, c5, c6, c7))
 	}
 
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck, _ c3: Deck, _ c4: Deck, _ c5: Deck, _ c6: Deck, _ c7: Deck) -> [AnyView] {
-		[c0, c1, c2, c3, c4, c5, c6, c7].flatMap { $0.steps }
-	}
-
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck, _ c3: Deck, _ c4: Deck, _ c5: Deck, _ c6: Deck, _ c7: Deck, _ c8: Deck) -> [AnyView] {
-		[c0, c1, c2, c3, c4, c5, c6, c7, c8].flatMap { $0.steps }
-	}
-
-	static func buildBlock(_ c0: Deck, _ c1: Deck, _ c2: Deck, _ c3: Deck, _ c4: Deck, _ c5: Deck, _ c6: Deck, _ c7: Deck, _ c8: Deck, _ c9: Deck) -> [AnyView] {
-		[c0, c1, c2, c3, c4, c5, c6, c7, c8, c9].flatMap { $0.steps }
+	static func buildBlock<C0: Deck, C1: Deck, C2: Deck, C3: Deck, C4: Deck, C5: Deck, C6: Deck, C7: Deck, C8: Deck>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleDeck9<C0, C1, C2, C3, C4, C5, C6, C7, C8> {
+		.init(contents: (c0, c1, c2, c3, c4, c5, c6, c7, c8))
 	}
 }

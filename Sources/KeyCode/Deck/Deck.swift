@@ -8,9 +8,11 @@
 import SwiftUI
 
 public protocol Deck {
-	@DeckBuilder<AnyView> var steps: [AnyView] { get }
+	associatedtype Content: View
+	
+	@DeckBuilder var steps: [Content] { get }
 }
 
 public struct EmptyDeck: Deck {
-	public var steps: [AnyView] { return [] }
+	public var steps: [EmptyView] { return [] }
 }

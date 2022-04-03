@@ -9,8 +9,8 @@ import SwiftUI
 
 extension EventModifiers: Hashable {}
 
-public struct DeckStepperView: View {
-	public let deck: [AnyView]
+public struct DeckStepperView<Content: View>: View {
+	public let deck: [Content]
 	public var animations: [(EventModifiers, Animation)]
 	
 	@State public var step: Int = 0
@@ -21,7 +21,7 @@ public struct DeckStepperView: View {
 		   [.option]: .easeInOut(duration: 1),
 		   [.command]: .instant
 		],
-		@DeckBuilder<AnyView> deck: () -> [AnyView])
+		@DeckBuilder deck: () -> [Content])
 	{
 		self.deck = deck()
 		
