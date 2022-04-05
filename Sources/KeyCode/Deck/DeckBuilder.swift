@@ -9,20 +9,14 @@ import SwiftUI
 
 @resultBuilder
 public struct DeckBuilder {
-	public static func buildBlock() -> EmptyDeck {
-		.init()
+	static func buildBlock() -> [EmptyView] {
+		[]
 	}
 
-	public static func buildBlock<Content: Deck>(_ c0: Content) -> Content {
-		c0
+	static func buildBlock<Content: View>(_ c0: Content) -> [Content] {
+		[c0]
 	}
 	
-	public static func buildIf<Content>(_ content: Content?) -> Content? where Content: Deck {
-		return content
-	}
-}
-	
-public extension DeckBuilder {
 	static func buildBlock<C0: Deck, C1: Deck>(_ c0: C0, _ c1: C1) -> TupleDeck2<C0, C1> {
 		.init(contents: (c0, c1))
 	}
