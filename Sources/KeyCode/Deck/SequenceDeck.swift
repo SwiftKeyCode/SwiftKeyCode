@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-public struct SequenceDeck<Content: View>: Deck {
-	public var contents: [Content]
+public struct SequenceDeck<V: View>: Deck {
+	public var contents: [V]
 	
-	public init(@DeckBuilder _ contents: () -> [Content]) {
+	public init(@DeckBuilder<AnyView> _ contents: () -> [V]) {
 		self.contents = contents()
 	}
 	
-	public init(_ contents: [Content]) {
+	public init(_ contents: [V]) {
 		self.contents = contents
 	}
 
-	public var steps: [Content] {
-		return contents
+	public var steps: [AnyView] {
+		return contents.map { AnyView($0) }
 	}
 }

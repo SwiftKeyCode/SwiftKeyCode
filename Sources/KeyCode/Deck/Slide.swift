@@ -18,7 +18,7 @@ public struct Slide<V: View>: Deck {
 		self.contents = contents
 	}
 
-	public var steps: [V] {
-		return [contents]
+	public var steps: [AnyView] {
+		return [AnyView(contents)]
 	}
 }
