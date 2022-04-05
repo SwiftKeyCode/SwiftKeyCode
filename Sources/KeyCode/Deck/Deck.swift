@@ -10,7 +10,3 @@ import SwiftUI
 public protocol Deck {
 	@DeckBuilder<AnyView> var steps: [AnyView] { get }
 }
-
-public struct EmptyDeck: Deck {
-	public var steps: [AnyView] { return [] }
-}
