@@ -9,9 +9,12 @@ import SwiftUI
 import Combine
 
 public extension View {
-	func blinking(opacity: (Double, Double) = (0.2, 1)) -> some View {
+	func blinking(
+		opacity: (Double, Double) = (0.2, 1),
+		animation: Animation = Animation.linear(duration: 0.6)
+	) -> some View {
 		let change = opacity.1 - opacity.0
-		return boomerangAnimation {
+		return boomerangAnimation(animation: animation) {
 			$0.opacity(opacity.0 + (change * $1))
 		}
 	}
