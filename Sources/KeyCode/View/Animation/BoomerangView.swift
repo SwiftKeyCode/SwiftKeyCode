@@ -21,9 +21,10 @@ public extension View {
 
 	func boomerangAnimation<V: View>(
 		animation: Animation = Animation.linear(duration: 0.6),
+		autoreverses: Bool = true,
 		modifier: @escaping (Self, Double) -> V
 	) -> some View {
-		BoomerangView(content: self, modifier: modifier, animation: animation)
+		BoomerangView(content: self, modifier: modifier, animation: animation, autoreverses: autoreverses)
 	}
 }
 
@@ -31,25 +32,29 @@ public struct BoomerangView<V: View, M: View>: View {
 	public var content: V
 	public var modifier: (V, Double) -> M
 
-	public var animation: Animation = Animation.linear(duration: 0.6)
+	public var animation: Animation
+	
+	public var autoreverses: Bool
 
 	@State public var value: Double = 0
 	
 	public init(
 		content: V,
 		modifier: @escaping (V, Double) -> M,
-		animation: Animation = Animation.linear(duration: 0.6)
+		animation: Animation = Animation.linear(duration: 0.6),
+		autoreverses: Bool = true
 	) {
 		self.content = content
 		self.modifier = modifier
 		self.animation = animation
 		self._value = .init(initialValue: 0.0)
+		self.autoreverses = autoreverses
 	}
 	
 	public var body: some View {
 		modifier(content, value)
 			.onAppear {
-				withAnimation(animation.repeatForever()) {
+				withAnimation(animation.repeatForever(autoreverses: autoreverses)) {
 					value = 1
 				}
 			}
