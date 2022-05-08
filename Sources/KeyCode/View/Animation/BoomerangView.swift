@@ -52,3 +52,16 @@ public struct BoomerangView<V: View, M: View>: View {
 			}
 	}
 }
+
+struct BoomerangView_Previews: PreviewProvider {
+	static var previews: some View {
+		DeckStepperView {
+			Slide {
+				Circle().fill(Color.red)
+					.boomerangAnimation {
+						$0.scaleEffect(x: 1 + CGFloat($1) * 0.02)
+					}
+			}
+		}
+	}
+}
