@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct TickingView: NSViewControllerRepresentable {
-	var timeInterval: TimeInterval? = nil
-	var tick: (() -> Void)? = nil
+public struct TickingView: NSViewControllerRepresentable {
+	public var timeInterval: TimeInterval? = nil
+	public var tick: (() -> Void)? = nil
 
-	var construct: (() -> Void)? = nil
-	var destruct: (() -> Void)? = nil
+	public var construct: (() -> Void)? = nil
+	public var destruct: (() -> Void)? = nil
 
-	func makeNSViewController(context: Context) -> ViewController {
+	public func makeNSViewController(context: Context) -> ViewController {
 		ViewController()
 	}
 	
-	func updateNSViewController(_ nsViewController: ViewController, context: Context) {
+	public func updateNSViewController(_ nsViewController: ViewController, context: Context) {
 		nsViewController.construct = construct
 		nsViewController.destruct = destruct
 
@@ -26,25 +26,25 @@ struct TickingView: NSViewControllerRepresentable {
 		nsViewController.tick = tick
 	}
 
-	class ViewController: NSViewController {
-		var timeInterval: TimeInterval?
-		var tick: (() -> Void)? = nil
+	public class ViewController: NSViewController {
+		public var timeInterval: TimeInterval?
+		public var tick: (() -> Void)? = nil
 
-		var construct: (() -> Void)? = nil
-		var destruct: (() -> Void)? = nil
+		public var construct: (() -> Void)? = nil
+		public var destruct: (() -> Void)? = nil
 
-		var timer: Timer?
+		public var timer: Timer?
 		
-		init() {
+		public init() {
 			super.init(nibName: nil, bundle: nil)
 			self.view = NSView()
 		}
 
-		required init?(coder: NSCoder) {
+		public required init?(coder: NSCoder) {
 			fatalError("init(coder:) has not been implemented")
 		}
 		
-		override func viewWillAppear() {
+		public override func viewWillAppear() {
 			super.viewWillAppear()
 			
 			construct?()
@@ -56,7 +56,7 @@ struct TickingView: NSViewControllerRepresentable {
 			}
 		}
 
-		override func viewWillDisappear() {
+		public override func viewWillDisappear() {
 			super.viewWillDisappear()
 			
 			timer?.invalidate()
@@ -67,7 +67,7 @@ struct TickingView: NSViewControllerRepresentable {
 	}
 }
 
-extension View {
+public extension View {
 	func ticking(
 		atInterval timeInterval: TimeInterval,
 		construct: (() -> Void)? = nil,
