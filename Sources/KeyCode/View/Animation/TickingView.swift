@@ -25,8 +25,10 @@ public struct TickingView: NSViewControllerRepresentable {
 		nsViewController.timeInterval = timeInterval
 		nsViewController.tick = tick
 	}
+}
 
-	public class ViewController: NSViewController {
+public extension TickingView {
+	class ViewController: NSViewController {
 		public var timeInterval: TimeInterval?
 		public var tick: (() -> Void)? = nil
 
