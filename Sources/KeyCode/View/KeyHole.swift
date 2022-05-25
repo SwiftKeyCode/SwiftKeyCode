@@ -13,19 +13,19 @@ public class KeyHole {
 
 	public var pressedKeys: Set<UInt16> = []
 
-	init(capturedKeys: Set<UInt16>) {
+	public init(capturedKeys: Set<UInt16>) {
 		self.capturedKeys = capturedKeys
 	}
 	
-	init(capturedKeys: Set<Int>) {
+	public init(capturedKeys: Set<Int>) {
 		self.capturedKeys = Set(capturedKeys.map(UInt16.init))
 	}
 	
-	func makeView() -> ViewRepresentable {
+	public func makeView() -> ViewRepresentable {
 		ViewRepresentable(keyHole: self)
 	}
 	
-	func contains(_ keyCode: Int) -> Bool {
+	public func contains(_ keyCode: Int) -> Bool {
 		pressedKeys.contains(UInt16(keyCode))
 	}
 }
