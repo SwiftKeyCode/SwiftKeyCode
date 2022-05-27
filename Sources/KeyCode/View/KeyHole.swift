@@ -21,9 +21,7 @@ public class KeyHole {
 		self.capturedKeys = Set(capturedKeys.map(UInt16.init))
 	}
 	
-	public func makeView() -> ViewRepresentable {
-		ViewRepresentable(keyHole: self)
-	}
+	public lazy var view: ViewRepresentable = ViewRepresentable(keyHole: self)
 	
 	public func contains(_ keyCode: Int) -> Bool {
 		pressedKeys.contains(UInt16(keyCode))
@@ -76,6 +74,6 @@ extension KeyHole {
 
 struct KeyHole_Previews: PreviewProvider {
 	static var previews: some View {
-		KeyHole(capturedKeys: [kVK_ANSI_A, kVK_ANSI_S]).makeView()
+		KeyHole(capturedKeys: [kVK_ANSI_A, kVK_ANSI_S]).view
 	}
 }
