@@ -89,12 +89,19 @@ extension KeyHole {
 			
 			super.updateTrackingAreas()
 		}
+		
+		private func updateMousePosition(with event: NSEvent) {
+			let location = self.convert(event.locationInWindow, from: nil)
+			keyHole?.mousePosition = CGPoint(x: location.x, y: bounds.size.height - location.y)
+		}
 
 		public override func mouseMoved(with event: NSEvent) {
-			keyHole?.mousePosition = event.locationInWindow
+			updateMousePosition(with: event)
 		}
 		
-		public override func mouseEntered(with event: NSEvent) { keyHole?.mousePosition = event.locationInWindow }
+		public override func mouseEntered(with event: NSEvent) {
+			updateMousePosition(with: event)
+		}
 		
 		public override func mouseExited(with event: NSEvent) { keyHole?.mousePosition = nil }
 	}
