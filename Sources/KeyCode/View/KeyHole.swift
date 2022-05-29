@@ -9,16 +9,20 @@ import SwiftUI
 import Carbon.HIToolbox.Events
 
 public class KeyHole {
-	public var capturedKeys: Set<UInt16>
+	public var capturedKeys: Set<UInt16> = []
+	public var tracksMouse = false
 
 	public var pressedKeys: Set<UInt16> = []
+	public var mousePosition: NSPoint?
 
-	public init(capturedKeys: Set<UInt16>) {
+	public init(capturedKeys: Set<UInt16>, tracksMouse: Bool = false) {
 		self.capturedKeys = capturedKeys
+		self.tracksMouse = tracksMouse
 	}
 	
-	public init(capturedKeys: Set<Int>) {
+	public init(capturedKeys: Set<Int>, tracksMouse: Bool = false) {
 		self.capturedKeys = Set(capturedKeys.map(UInt16.init))
+		self.tracksMouse = tracksMouse
 	}
 	
 	public lazy var view: ViewRepresentable = ViewRepresentable(keyHole: self)
@@ -38,12 +42,20 @@ extension KeyHole {
 		
 		public func updateNSView(_ view: View, context: NSViewRepresentableContext<ViewRepresentable>) {
 			view.keyHole = keyHole
+			view.updateTrackingAreas()
 		}
 	}
 	
 	public class View: NSView {
 		public weak var keyHole: KeyHole?
 		
+		var mouseTrackingArea: NSTrackingArea? {
+			didSet {
+				oldValue.map(removeTrackingArea)
+				mouseTrackingArea.map(addTrackingArea)
+			}
+		}
+				
 		public override var acceptsFirstResponder: Bool {
 			true
 		}
@@ -69,6 +81,22 @@ extension KeyHole {
 
 			keyHole.pressedKeys.remove(event.keyCode)
 		}
+		
+		public override func updateTrackingAreas() {
+			mouseTrackingArea = (keyHole?.tracksMouse ?? false)
+				? NSTrackingArea(rect: bounds, options: [.activeAlways, .mouseMoved, .mouseEnteredAndExited], owner: self)
+				: nil
+			
+			super.updateTrackingAreas()
+		}
+
+		public override func mouseMoved(with event: NSEvent) {
+			keyHole?.mousePosition = event.locationInWindow
+		}
+		
+		public override func mouseEntered(with event: NSEvent) { keyHole?.mousePosition = event.locationInWindow }
+		
+		public override func mouseExited(with event: NSEvent) { keyHole?.mousePosition = nil }
 	}
 }
 
