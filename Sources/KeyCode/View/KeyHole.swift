@@ -15,12 +15,12 @@ public class KeyHole {
 	public var pressedKeys: Set<UInt16> = []
 	public var mousePosition: NSPoint?
 
-	public init(capturedKeys: Set<UInt16>, tracksMouse: Bool = false) {
+	public init(capturedKeys: Set<UInt16> = [], tracksMouse: Bool = false) {
 		self.capturedKeys = capturedKeys
 		self.tracksMouse = tracksMouse
 	}
 	
-	public init(capturedKeys: Set<Int>, tracksMouse: Bool = false) {
+	public init(capturedKeys: Set<Int> = [], tracksMouse: Bool = false) {
 		self.capturedKeys = Set(capturedKeys.map(UInt16.init))
 		self.tracksMouse = tracksMouse
 	}
