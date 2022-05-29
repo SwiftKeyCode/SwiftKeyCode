@@ -24,6 +24,8 @@ public struct TickingView: NSViewControllerRepresentable {
 
 		nsViewController.timeInterval = timeInterval
 		nsViewController.tick = tick
+		
+		nsViewController.makeTimer()
 	}
 }
 
@@ -46,16 +48,25 @@ public extension TickingView {
 			fatalError("init(coder:) has not been implemented")
 		}
 		
-		public override func viewWillAppear() {
-			super.viewWillAppear()
-			
-			construct?()
+		func makeTimer() {
+			timer?.invalidate()
 			
 			if let tick = tick, let timeInterval = timeInterval {
 				timer = .scheduledTimer(withTimeInterval: timeInterval, repeats: true) { _ in
 					tick()
 				}
 			}
+			else {
+				timer = nil
+			}
+		}
+		
+		public override func viewWillAppear() {
+			super.viewWillAppear()
+			
+			construct?()
+			
+			makeTimer()
 		}
 
 		public override func viewWillDisappear() {
