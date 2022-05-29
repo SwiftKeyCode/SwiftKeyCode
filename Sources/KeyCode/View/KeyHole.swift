@@ -20,7 +20,7 @@ public class KeyHole {
 		self.tracksMouse = tracksMouse
 	}
 	
-	public init(capturedKeys: Set<Int> = [], tracksMouse: Bool = false) {
+	public init(capturedKeys: Set<Int>, tracksMouse: Bool = false) {
 		self.capturedKeys = Set(capturedKeys.map(UInt16.init))
 		self.tracksMouse = tracksMouse
 	}
