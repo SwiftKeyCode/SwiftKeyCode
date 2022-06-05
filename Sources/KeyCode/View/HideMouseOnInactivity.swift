@@ -20,8 +20,15 @@ public struct HideMouseOnInactivity: NSViewRepresentable {
 		public override func updateTrackingAreas() {
 			trackingArea.map(removeTrackingArea)
 			// TODO How to update during drag?
-			trackingArea = NSTrackingArea(rect: bounds, options: [.mouseEnteredAndExited, .inVisibleRect, .activeInKeyWindow], owner: self, userInfo: nil)
+			trackingArea = NSTrackingArea(rect: bounds, options: [.mouseEnteredAndExited, .mouseMoved, .inVisibleRect, .activeInKeyWindow], owner: self, userInfo: nil)
 			addTrackingArea(trackingArea!)
+		}
+		
+		public override func mouseMoved(with event: NSEvent) {
+			timer?.invalidate()
+			timer = .scheduledTimer(withTimeInterval: seconds, repeats: true) { _ in
+				NSCursor.setHiddenUntilMouseMoves(true)
+			}
 		}
 		
 		public override func mouseEntered(with event: NSEvent) {
