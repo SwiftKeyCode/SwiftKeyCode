@@ -10,20 +10,18 @@ import SwiftUI
 extension EventModifiers: Hashable {}
 
 public struct DeckStepperView: View {
-	public let deck: [AnyView]
+	@ObservedObject public var deckStepper: DeckStepper
 	public var animations: [(EventModifiers, Animation)]
-	
-	@State public var step: Int = 0
 
 	public init(
 		animations: [EventModifiers: Animation] = [
 			[]: .default,
-		   [.option]: .easeInOut(duration: 1),
-		   [.command]: .instant
+			[.option]: .easeInOut(duration: 1),
+			[.command]: .instant
 		],
 		@DeckBuilder<AnyView> deck: () -> [AnyView])
 	{
-		self.deck = deck()
+		self.deckStepper = DeckStepper(deck: deck)
 		
 		self.animations = Array(animations).sorted { $0.key.rawValue < $1.key.rawValue }
 	}
@@ -31,31 +29,23 @@ public struct DeckStepperView: View {
 	public var body: some View {
 		ZStack {
 			VStack {
-				deck[step]
+				deckStepper.currentView
 			}
 
 			ForEach(Array(animations), id: \.0) { (modifiers, animation) in
 				Button.invisible {
 					withAnimation(animation) {
-						previous()
+						deckStepper.previous()
 					}
 				}.keyboardShortcut(.leftArrow, modifiers: modifiers)
 
 				Button.invisible {
 					withAnimation(animation) {
-						next()
+						deckStepper.next()
 					}
 				}.keyboardShortcut(.rightArrow, modifiers: modifiers)
 			}
 		}
-	}
-	
-	public func previous() {
-		step = max(step - 1, 0)
-	}
-	
-	public func next() {
-		step = min(step + 1, deck.count - 1)
 	}
 }
 
