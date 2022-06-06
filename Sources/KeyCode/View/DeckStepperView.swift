@@ -27,13 +27,9 @@ public struct DeckStepperView: View {
 	}
 	
 	public var body: some View {
-		ZStack {
-			VStack {
-				deckStepper.currentView
-			}
-
+		deckStepper.currentView.background(
 			Controls(deckStepper: deckStepper, animations: animations)
-		}
+		)
 	}
 }
 
