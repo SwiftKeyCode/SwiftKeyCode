@@ -32,6 +32,20 @@ public struct DeckStepperView: View {
 				deckStepper.currentView
 			}
 
+			Controls(deckStepper: deckStepper, animations: animations)
+		}
+	}
+}
+
+extension DeckStepperView {
+	struct Controls: View {
+		// This class does not observe DeckStepper and will thus not be re-generated.
+		// This helps with SwiftUI being confused and re-creating buttons sometimes,
+		// offering them up for re-trigger.
+		public var deckStepper: DeckStepper
+		public var animations: [(EventModifiers, Animation)]
+
+		public var body: some View {
 			ForEach(Array(animations), id: \.0) { (modifiers, animation) in
 				Button.invisible {
 					withAnimation(animation) {
