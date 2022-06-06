@@ -59,4 +59,13 @@ public struct DeckStepperView: View {
 	}
 }
 
-
+struct DeckStepper_Previews: PreviewProvider {
+	static var previews: some View {
+		DeckStepperView {
+			Slide { Rectangle().fill(Color.red) }
+			Slide { Rectangle().fill(Color.yellow) }
+			Slide { Rectangle().fill(Color.green) }
+			Slide { Rectangle().fill(Color.blue) }
+		}
+	}
+}
