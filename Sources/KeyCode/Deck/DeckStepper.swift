@@ -10,7 +10,9 @@ import SwiftUI
 public class DeckStepper: ObservableObject {
 	public let deck: [AnyView]
 	
-	@State public var step: Int = 0
+	public var step: Int = 0 {
+		willSet { objectWillChange.send() }
+	}
 	
 	public init(
 		@DeckBuilder<AnyView> deck: () -> [AnyView])
