@@ -8,5 +8,5 @@
 import SwiftUI
 
 public struct EmptyDeck: Deck {
-	public var steps: [AnyView] { return [] }
+	public var steps: [EmptyView] { return [] }
 }

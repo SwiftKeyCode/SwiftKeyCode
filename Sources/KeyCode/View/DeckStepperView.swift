@@ -9,8 +9,8 @@ import SwiftUI
 
 extension EventModifiers: Hashable {}
 
-public struct DeckStepperView: View {
-	@ObservedObject public var deckStepper: DeckStepper
+public struct DeckStepperView<Content: View>: View {
+	@ObservedObject public var deckStepper: DeckStepper<Content>
 	public var animations: [(EventModifiers, Animation)]
 
 	public init(
@@ -19,7 +19,7 @@ public struct DeckStepperView: View {
 			[.option]: .easeInOut(duration: 1),
 			[.command]: .instant
 		],
-		@DeckBuilder<AnyView> deck: () -> [AnyView])
+		@DeckBuilder<Content> deck: () -> [Content])
 	{
 		self.deckStepper = DeckStepper(deck: deck)
 		
@@ -38,7 +38,7 @@ extension DeckStepperView {
 		// This class does not observe DeckStepper and will thus not be re-generated.
 		// This helps with SwiftUI being confused and re-creating buttons sometimes,
 		// offering them up for re-trigger.
-		public var deckStepper: DeckStepper
+		public var deckStepper: DeckStepper<Content>
 		public var animations: [(EventModifiers, Animation)]
 
 		public var body: some View {
@@ -66,6 +66,13 @@ struct DeckStepper_Previews: PreviewProvider {
 			Slide { Rectangle().fill(Color.yellow) }
 			Slide { Rectangle().fill(Color.green) }
 			Slide { Rectangle().fill(Color.blue) }
+		}
+
+		DeckStepperView {
+			Slide { Rectangle().fill(Color.red) }
+			Slide { Rectangle().fill(Color.yellow) }
+			Slide { Rectangle().fill(Color.green) }
+			Slide { Rectangle() }
 		}
 	}
 }

@@ -8,5 +8,7 @@
 import SwiftUI
 
 public protocol Deck {
-	@DeckBuilder<AnyView> var steps: [AnyView] { get }
+	associatedtype Content: View
+	
+	@DeckBuilder<Content> var steps: [Content] { get }
 }

@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-public struct Slide<V: View>: Deck {
-	public var contents: V
+public struct Slide<Content: View>: Deck {
+	public var content: Content
 	
-	public init(@ViewBuilder _ contents: () -> V) {
-		self.contents = contents()
+	public init(@ViewBuilder _ content: () -> Content) {
+		self.content = content()
 	}
 
-	public init(_ contents: V) {
-		self.contents = contents
+	public init(_ content: Content) {
+		self.content = content
 	}
 
-	public var steps: [AnyView] {
-		return [AnyView(contents)]
+	public var steps: [Content] {
+		return [content]
 	}
 }
