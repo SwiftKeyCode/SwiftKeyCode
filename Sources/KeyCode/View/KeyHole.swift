@@ -31,7 +31,7 @@ public class KeyHole {
 		pressedKeys.contains(UInt16(keyCode))
 	}
 	
-	public func getAxis(positive: Int, negative: Int) -> Int {
+	public func getAxis(positive: Int, negative: Int) -> Double {
 		(contains(positive) ? 1 : 0) - (contains(negative) ? 1 : 0)
 	}
 }
