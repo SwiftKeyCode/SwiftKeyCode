@@ -30,6 +30,10 @@ public class KeyHole {
 	public func contains(_ keyCode: Int) -> Bool {
 		pressedKeys.contains(UInt16(keyCode))
 	}
+	
+	public func getAxis(positive: Int, negative: Int) -> Int {
+		(contains(positive) ? 1 : 0) - (contains(negative) ? 1 : 0)
+	}
 }
 
 extension KeyHole {
